@@ -17,11 +17,10 @@
 package com.twitter.json
 
 import extensions._
-import org.specs._
+import org.specs.SpecificationWithJUnit
 import scala.collection.immutable
 
-
-class JsonSpec extends Specification {
+class JsonSpec extends SpecificationWithJUnit {
   "Json" should {
     "quote strings" in {
       "unicode within latin-1" in {
