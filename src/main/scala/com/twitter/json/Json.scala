@@ -21,6 +21,7 @@ import scala.util.Sorting
 import scala.util.parsing.combinator._
 
 
+@deprecated("use jackson", "3.0.0")
 trait JsonSerializable {
   def toJson(): String
 }
@@ -125,6 +126,7 @@ object Json {
   /**
    * Quote a string according to "JSON rules".
    */
+  @deprecated("use jackson", "3.0.0")
   def quote(s: String) = {
     val charCount = s.codePointCount(0, s.length)
     "\"" + 0.to(charCount - 1).map { idx =>
@@ -143,6 +145,7 @@ object Json {
   /**
    * Returns a JSON representation of the given object, as a JsonQuoted object.
    */
+  @deprecated("use jackson", "3.0.0")
   def build(obj: Any): JsonQuoted = {
     val rv = obj match {
       case JsonQuoted(body) => body
@@ -166,6 +169,7 @@ object Json {
   /**
    * Parses a JSON String representation into its native Scala reprsentation.
    */
+  @deprecated("use jackson", "3.0.0")
   def parse(s: String): Any = (new JsonParser).parse(s)
 }
 
