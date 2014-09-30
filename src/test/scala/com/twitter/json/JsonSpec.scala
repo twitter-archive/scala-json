@@ -31,6 +31,11 @@ class JsonSpec extends SpecificationWithJUnit {
         Json.quote("\u6771\u4eac") mustEqual "\"\\u6771\\u4eac\""
       }
 
+      "control characters are escaped" in {
+        val controlChars = "\u0000\u001f\u0020"
+        Json.quote(controlChars) mustEqual "\"\\u0000\\u001f\u0020\""
+      }
+
       "string containing unicode outside of the BMP (using UTF-16 surrogate pairs)" in {
         // NOTE: The json.org spec is unclear on how to handle supplementary characters.
         val ridiculous = new java.lang.StringBuilder()

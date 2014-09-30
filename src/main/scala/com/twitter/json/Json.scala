@@ -113,12 +113,24 @@ private class JsonParser extends JavaTokenParsers {
  * recursive Sequence or Map. You are in flavor country.
  */
 object Json {
+  /**
+   * From the JSON specification:
+   * 2.5. Strings
+   *
+   * The representation of strings is similar to conventions used in the
+   * C family of programming languages. A string begins and ends with
+   * quotation marks. All Unicode characters may be placed within the
+   * quotation marks except for the characters that must be escaped:
+   * quotation mark, reverse solidus, and the control characters (U+0000 through U+001F).
+   *
+   * Any character may be escaped.
+   */
   private[json] def quotedChar(codePoint: Int) = {
     codePoint match {
       case c if c > 0xffff =>
         val chars = Character.toChars(c)
         "\\u%04x\\u%04x".format(chars(0).toInt, chars(1).toInt)
-      case c if c > 0x7e => "\\u%04x".format(c.toInt)
+      case c if c > 0x7e || c <= 0x1f => "\\u%04x".format(c.toInt)
       case c => c.toChar
     }
   }
