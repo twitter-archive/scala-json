@@ -1,5 +1,6 @@
 /*
- * Copyright 2009 Twitter, Inc.
+ * Copyright 2007-2010 Artima, Inc.
+ * Copyright 2009-2014 Twitter, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may
  * not use this file except in compliance with the License. You may obtain
@@ -16,7 +17,7 @@
 
 package com.twitter.json
 
-import extensions._
+import com.twitter.json.extensions._
 import scala.util.Sorting
 import scala.util.parsing.combinator._
 

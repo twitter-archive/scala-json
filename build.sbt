@@ -1,10 +1,14 @@
 name := "scala-json"
 
-version := "3.0.1"
+version := "3.0.2"
 
 organization := "com.twitter"
 
-crossScalaVersions := Seq("2.9.2", "2.10.0")
+scalaVersion := "2.10.4"
+
+crossScalaVersions := Seq("2.10.4", "2.11.4")
+
+scalacOptions += "-language:implicitConversions"
 
 javacOptions ++= Seq("-source", "1.6", "-target", "1.6")
 
@@ -12,16 +16,18 @@ javacOptions in doc := Seq("-source", "1.6")
 
 parallelExecution in Test := false
 
-resolvers += "twitter repo" at "http://maven.twttr.com"
-
 libraryDependencies ++= Seq(
-  "org.scala-tools.testing" %% "specs" % "1.6.9" % "test" cross CrossVersion.binaryMapped {
-    case "2.9.2" => "2.9.1"
-    case "2.10.0" => "2.10"
-    case x => x
-  },
-  "junit" % "junit" % "4.8.1" % "test"
+  "org.scalatest" %% "scalatest" % "2.2.2" % "test",
+  "junit" % "junit" % "4.10" % "test"
 )
+
+libraryDependencies <++= scalaVersion { (v: String) =>
+  CrossVersion.partialVersion(v) match {
+    case Some((2, scalaMajor)) if scalaMajor >= 11 =>
+      Seq("org.scala-lang.modules" %% "scala-parser-combinators" % "1.0.2")
+    case _ => Seq()
+  }
+}
 
 publishMavenStyle := true
 
@@ -41,10 +47,9 @@ pomExtra := (
   <url>https://github.com/twitter/scala-json</url>
   <licenses>
     <license>
-      <name>Apache 2</name>
-      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <name>Apache License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0</url>
       <distribution>repo</distribution>
-      <comments>A business-friendly OSS license</comments>
     </license>
   </licenses>
   <scm>
