@@ -1,4 +1,4 @@
-# scala-json [![Build Status](https://secure.travis-ci.org/twitter/scala-json.png)](https://travis-ci.org/twitter/scala-json)
+# scala-json [![Build Status](https://secure.travis-ci.org/twitter/scala-json.png?branch=master)](https://travis-ci.org/twitter/scala-json)
 
 This library is deprecated! It should not be used for new projects, and is
 maintained only because it is used in
