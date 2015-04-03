@@ -4,9 +4,9 @@ version := "3.0.2"
 
 organization := "com.twitter"
 
-scalaVersion := "2.10.4"
+scalaVersion := "2.10.5"
 
-crossScalaVersions := Seq("2.10.4", "2.11.4")
+crossScalaVersions := Seq("2.10.5", "2.11.6")
 
 scalacOptions += "-language:implicitConversions"
 
