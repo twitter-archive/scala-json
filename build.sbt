@@ -17,7 +17,7 @@ javacOptions in doc := Seq("-source", "1.6")
 parallelExecution in Test := false
 
 libraryDependencies ++= Seq(
-  "org.scalatest" %% "scalatest" % "2.2.2" % "test",
+  "org.scalatest" %% "scalatest" % "2.2.4" % "test",
   "junit" % "junit" % "4.10" % "test"
 )
 
