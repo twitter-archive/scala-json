@@ -1,12 +1,12 @@
 maven_layout()
 
-jar_library(name='scala-json',
+target(name='scala-json',
   dependencies=[
     'scala-json/src/main/scala'
   ]
 )
 
-jar_library(name='tests',
+target(name='tests',
   dependencies=[
     'scala-json/src/test/scala'
   ]
