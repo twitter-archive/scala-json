@@ -1,19 +1,11 @@
 name := "scala-json"
-
 version := "3.0.2"
-
 organization := "com.twitter"
-
 scalaVersion := "2.10.5"
-
 crossScalaVersions := Seq("2.10.5", "2.11.6")
-
 scalacOptions += "-language:implicitConversions"
-
-javacOptions ++= Seq("-source", "1.6", "-target", "1.6")
-
-javacOptions in doc := Seq("-source", "1.6")
-
+javacOptions ++= Seq("-source", "1.7", "-target", "1.7")
+javacOptions in doc := Seq("-source", "1.7")
 parallelExecution in Test := false
 
 libraryDependencies ++= Seq(
@@ -24,13 +16,19 @@ libraryDependencies ++= Seq(
 libraryDependencies <++= scalaVersion { (v: String) =>
   CrossVersion.partialVersion(v) match {
     case Some((2, scalaMajor)) if scalaMajor >= 11 =>
-      Seq("org.scala-lang.modules" %% "scala-parser-combinators" % "1.0.2")
+      Seq("org.scala-lang.modules" %% "scala-parser-combinators" % "1.0.4")
     case _ => Seq()
   }
 }
 
-publishMavenStyle := true
+ScoverageSbtPlugin.ScoverageKeys.coverageHighlighting := (
+  CrossVersion.partialVersion(scalaVersion.value) match {
+    case Some((2, 10)) => false
+    case _ => true
+  }
+)
 
+publishMavenStyle := true
 publishTo <<= version { (v: String) =>
   val nexus = "https://oss.sonatype.org/"
   if (v.trim.endsWith("SNAPSHOT"))
@@ -38,11 +36,8 @@ publishTo <<= version { (v: String) =>
   else
     Some("sonatype-releases"  at nexus + "service/local/staging/deploy/maven2")
 }
-
 publishArtifact in Test := false
-
 pomIncludeRepository := { x => false }
-
 pomExtra := (
   <url>https://github.com/twitter/scala-json</url>
   <licenses>
