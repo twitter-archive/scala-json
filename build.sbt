@@ -4,28 +4,43 @@ version := "3.0.2"
 
 organization := "com.twitter"
 
-scalaVersion := "2.10.4"
+scalaVersion := "2.10.6"
 
-crossScalaVersions := Seq("2.10.4", "2.11.4")
+crossScalaVersions := Seq("2.10.6", "2.11.8", "2.12.0-M4")
 
 scalacOptions += "-language:implicitConversions"
 
-javacOptions ++= Seq("-source", "1.6", "-target", "1.6")
+javacOptions ++= {
+  CrossVersion.partialVersion(scalaVersion.value) match {
+    case Some((2, scalaMajor)) if scalaMajor >= 12 =>
+      Seq("-source", "1.8", "-target", "1.8")
+    case _ =>
+      Seq("-source", "1.6", "-target", "1.6")
+  }
+}
 
-javacOptions in doc := Seq("-source", "1.6")
+javacOptions in doc := {
+  CrossVersion.partialVersion(scalaVersion.value) match {
+    case Some((2, scalaMajor)) if scalaMajor >= 12 =>
+      Seq("-source", "1.8")
+    case _ =>
+      Seq("-source", "1.6")
+  }
+}
 
 parallelExecution in Test := false
 
 libraryDependencies ++= Seq(
-  "org.scalatest" %% "scalatest" % "2.2.2" % "test",
+  "org.scalatest" %% "scalatest" % "2.2.6" % "test",
   "junit" % "junit" % "4.10" % "test"
 )
 
-libraryDependencies <++= scalaVersion { (v: String) =>
-  CrossVersion.partialVersion(v) match {
+libraryDependencies ++= {
+  CrossVersion.partialVersion(scalaVersion.value) match {
     case Some((2, scalaMajor)) if scalaMajor >= 11 =>
       Seq("org.scala-lang.modules" %% "scala-parser-combinators" % "1.0.2")
-    case _ => Seq()
+    case _ =>
+      Seq.empty
   }
 }
 
