@@ -4,7 +4,7 @@ sbtver=0.13.7
 sbtjar=sbt-launch.jar
 sbtsha128=b407b2a76ad72165f806ac7e7ea09132b951ef53
 
-sbtrepo=http://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/sbt-launch
+sbtrepo=https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/sbt-launch
 
 if [ ! -f $sbtjar ]; then
   echo "downloading $sbtjar" 1>&2
