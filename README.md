@@ -1,8 +1,7 @@
 # scala-json [![Build Status](https://secure.travis-ci.org/twitter/scala-json.png)](https://travis-ci.org/twitter/scala-json)
 
 This library is deprecated! It should not be used for new projects, and is
-maintained only because it is used in
-[Twitter's Ostrich 9.x](https://github.com/twitter/ostrich).
+nor maintained.
 
 This project is a toolkit for working with JSON in Scala that is based on
 [example code](http://booksites.artima.com/programming_in_scala_2ed/examples/)
